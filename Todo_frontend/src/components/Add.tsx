@@ -1,6 +1,7 @@
 
 import type { Todo_type } from './utilities/types';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 //import type React from "react";
 
@@ -9,6 +10,8 @@ export default function Todo() {
     const [description, setDescription] = useState("");
     const [completed, setCompleted] = useState(false);
     const [error, setError] = useState<string | null>(null); 
+    const navigate = useNavigate();
+
     
      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -33,6 +36,7 @@ export default function Todo() {
         
         const data = await response.json();
         console.log('Success:', data);
+        navigate("/view-todos");
     
     } catch (error) {
         console.error('Error:', error);
@@ -48,7 +52,7 @@ export default function Todo() {
                 <h1>Add Todo</h1>
             </div>
 
-            {error && <div style={{ color: 'red' }}>{error}</div>} {/* Show error message if any */}
+            {error && <div style={{ color: 'red' }}>{error}</div>} 
 
 
 
@@ -69,7 +73,7 @@ export default function Todo() {
                                onChange={(e) => setDescription(e.target.value)}     
                         />
                     </div>
-
+{/*
                     <div>
                         <label htmlFor="completed">Completed:</label>
                         <input type="checkbox" id="completed" 
@@ -80,7 +84,7 @@ export default function Todo() {
                         />
                         
                     </div>
-
+*/}
               {/* not required for now   
                   <div>
                         <input type="file"
