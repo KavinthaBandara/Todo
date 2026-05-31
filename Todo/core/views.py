@@ -28,7 +28,7 @@ def home(request):
 
 
     #def AddTodo(request):
-    class AddTodo(APIView):
+class AddTodo(APIView):
         def get(self, request):
             items = TodoItem.objects.all()
             serializer = serTodo(items, many=True)
@@ -50,4 +50,12 @@ def home(request):
 
 
 
-        
+class ViewTodo(APIView):
+    def get(self, request):
+        todo = TodoItem.objects.all()
+        serializer = serTodo(todo, many=True)
+        return self.response({'status': 'bon', 'data': serializer.data}, status=status.HTTP_200_OK)
+
+
+
+
