@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Todo() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [completed, setCompleted] = useState(false);
+    //const [completed, setCompleted] = useState(false);
     const [error, setError] = useState<string | null>(null); 
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export default function Todo() {
         const newTodo: Todo_type = {
             title,
             description,
-            completed,
+
         };
 
         try {
