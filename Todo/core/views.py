@@ -54,7 +54,7 @@ class ViewTodo(APIView):
     def get(self, request):
         todo = TodoItem.objects.all()
         serializer = serTodo(todo, many=True)
-        return self.response({'status': 'bon', 'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response({'status': 'bon', 'data': serializer.data}, status=status.HTTP_200_OK)
 
 
 

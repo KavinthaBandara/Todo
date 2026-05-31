@@ -12,6 +12,7 @@ class Player(models.Model):
 
 
 class TodoItem(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     #image = models.ImageField(upload_to='todo_images/', null=True, blank=True)
