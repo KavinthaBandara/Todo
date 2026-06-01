@@ -13,6 +13,7 @@ import type { Todo_type } from "./utilities/types"
             async function loadTodo() {
                 try{
                     const data = await TodoGetter();
+                    console.log(data);
                     setTodo(data);
                 } catch (error) {
                     setError("can't laod Todos");
@@ -39,10 +40,10 @@ import type { Todo_type } from "./utilities/types"
             </div>
 
             <div>
-                {todo.map((todo) => (
-                    <li key={todo.id}>
-                        {todo.title}
-                        {todo.description}
+                {todo.map((item) => (
+                    <li key={item.id}>
+                        {item.title}
+                        {item.description}
                     </li>
                 ))}
             </div>
