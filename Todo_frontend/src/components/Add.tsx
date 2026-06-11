@@ -2,14 +2,17 @@
 import type { Todo_type } from './utilities/types';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { TodoPost } from './utilities/todoAPI';
 
-//import type React from "react";
+//import type { FormEvent } from "react";
 
 export default function Todo() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     //const [completed, setCompleted] = useState(false);
-    const [error, setError] = useState<string | null>(null); 
+    const [error, setError] = useState<string | null>(null);
+   // const [loading, setLoading] = useState(false);
+    
     const navigate = useNavigate();
 
     
@@ -17,32 +20,31 @@ export default function Todo() {
         e.preventDefault();
         const newTodo: Todo_type = {
             title,
-            description,
-
+            description
         };
 
-        try {
-            const response = await fetch('http://localhost:8000/core/addtodo/', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(newTodo),
-            });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        if (!title.trim() || title.length < 3){
+            setError("Title is required field")
+            return;
         }
-        
-        
-        const data = await response.json();
-        console.log('Success:', data);
-        navigate("/view-todos");
-    
-    } catch (error) {
-        console.error('Error:', error);
-        setError(error instanceof Error ? error.message : 'An unknown error occurred');
 
-    }
+        let response: any;
+
+        try {
+            response = await TodoPost();
+            response = newTodo;
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        if (!response?.ok) {
+            throw new Error('Network response was not ok');
+        } else {
+            navigate("/view-todos");
+        }
+
+
 
      }
 

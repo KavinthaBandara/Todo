@@ -21,3 +21,21 @@ export async function TodoGetter(): Promise<Todo_type[]> {
 
     return result.data;
 };
+
+
+
+export async function TodoPost(): Promise<Todo_type[]> {
+    const response = await fetch(
+        "http://localhost:8000/core/addtodo/"
+
+    );
+    if (!response.ok) {
+        throw new Error('Failed to post todo')
+
+    };
+
+    return await response.json();
+
+
+
+}
