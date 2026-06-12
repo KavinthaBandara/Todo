@@ -1,3 +1,4 @@
+
 import type { Todo_type } from "./types";
 
 
@@ -24,9 +25,16 @@ export async function TodoGetter(): Promise<Todo_type[]> {
 
 
 
-export async function TodoPost(): Promise<Todo_type[]> {
+export async function TodoPost(todo: Todo_type) {
     const response = await fetch(
-        "http://localhost:8000/core/addtodo/"
+        "http://localhost:8000/core/addtodo/",
+        {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(todo)
+            }
 
     );
     if (!response.ok) {
