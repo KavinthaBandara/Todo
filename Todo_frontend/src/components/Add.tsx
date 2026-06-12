@@ -1,5 +1,5 @@
 
-import type { Todo_type } from './utilities/types';
+//import type { Todo_type } from './utilities/types';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { TodoPost } from './utilities/todoAPI';
@@ -31,12 +31,14 @@ export default function Todo() {
 
     try {
         const newTodo = await TodoPost({
-            id,
             title,
             description
         });
         setTitle(newTodo.title);
         setDescription(newTodo.description);
+
+        navigate("/viewtodo");
+
     } catch (error) {
         console.log(error);
         setError("Failed to add todo");
@@ -44,7 +46,7 @@ export default function Todo() {
     }   
 
 
-    navigate("/viewtodo");
+    
 
 
 

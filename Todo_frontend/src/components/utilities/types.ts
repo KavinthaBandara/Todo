@@ -1,7 +1,7 @@
 
 
 export interface Todo_type {
-    id: number;
+    id?: number;
     title: string;
     description: string;
    // completed: boolean;
