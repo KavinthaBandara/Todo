@@ -9,40 +9,42 @@ import { TodoPost } from './utilities/todoAPI';
 export default function Todo() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    //const [completed, setCompleted] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    //const [completed, setCompleted] = useState(false);
    // const [loading, setLoading] = useState(false);
     
     const navigate = useNavigate();
 
     
+
+
      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newTodo: Todo_type = {
+
+
+    if (!title.trim() || title.length < 3){
+        setError("Title is required field")
+        return;
+    }
+
+
+    try {
+        const newTodo = await TodoPost({
+            id,
             title,
             description
-        };
+        });
+        setTitle(newTodo.title);
+        setDescription(newTodo.description);
+    } catch (error) {
+        console.log(error);
+        setError("Failed to add todo");
+        return;
+    }   
 
-        if (!title.trim() || title.length < 3){
-            setError("Title is required field")
-            return;
-        }
 
-        let response: any;
-
-        try {
-            response = await TodoPost();
-            response = newTodo;
-
-        } catch (error) {
-            console.log(error);
-        }
-
-        if (!response?.ok) {
-            throw new Error('Network response was not ok');
-        } else {
-            navigate("/view-todos");
-        }
+    navigate("/viewtodo");
 
 
 
