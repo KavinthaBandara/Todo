@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+
 from .models import TodoItem
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -8,4 +9,5 @@ class TodoSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'completed']
 
 
-        
+
+
