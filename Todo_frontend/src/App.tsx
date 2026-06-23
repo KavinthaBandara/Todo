@@ -14,7 +14,7 @@ function App() {
           <BrowserRouter>
           <Routes>
               <Route path="/" element={<Todo />} />
-              <Route path="/view-todos" element={<ViewTodos />} />
+              <Route path="/viewtodos" element={<ViewTodos />} />
             </Routes>
         </BrowserRouter>
       </div>

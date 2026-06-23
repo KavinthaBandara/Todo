@@ -37,7 +37,7 @@ export default function Todo() {
         setTitle(newTodo.title);
         setDescription(newTodo.description);
 
-        navigate("/viewtodo");
+        navigate("viewtodos");
 
     } catch (error) {
         console.log(error);
@@ -67,7 +67,7 @@ export default function Todo() {
                     <div>
                         <input type="text" 
                                placeholder="Enter title" 
-                               value={title}
+                               value={title || ""}
                                onChange={(e) => setTitle(e.target.value)}     
                         />
                     </div>
@@ -75,7 +75,7 @@ export default function Todo() {
                     <div>
                         <input type="text" 
                                placeholder="Enter details" 
-                               value={description}
+                               value={description || ""}
                                onChange={(e) => setDescription(e.target.value)}     
                         />
                     </div>

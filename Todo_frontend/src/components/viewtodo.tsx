@@ -41,10 +41,12 @@ import type { Todo_type } from "./utilities/types"
 
             <div>
                 {todo.map((item) => (
-                    <li key={item.id}>
-                        {item.title}
-                        {item.description}
-                    </li>
+                    <ul>
+                        <li key={item.id}>
+                            {item.title}
+                            {item.description}
+                        </li>
+                    </ul>
                 ))}
             </div>
         </>
