@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { TodoGetter } from "./utilities/todoAPI"
+import { TodoGetter, TodoDelete } from "./utilities/todoAPI"
 import type { Todo_type } from "./utilities/types"
 
 
@@ -45,6 +45,15 @@ import type { Todo_type } from "./utilities/types"
                         <li key={item.id}>
                             {item.title}
                             {item.description}
+                           
+                    {/*    */}    
+                    <button onClick={() => {
+                                if (item.id) {
+                                    TodoDelete(item.id)
+                                }
+                            }}>
+                                Delete  
+                            </button> 
                         </li>
                     </ul>
                 ))}

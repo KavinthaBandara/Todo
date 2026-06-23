@@ -47,3 +47,22 @@ export async function TodoPost(todo: Todo_type) {
 
 
 }
+
+
+
+export async function TodoDelete(id: number): Promise<Todo_type[]> {
+   const response = await fetch(
+        `http://localhost:8000/core/${id}/delete/`,
+        {
+            method: 'delete',
+        }
+    );
+    if (!response.ok) {
+        throw new Error('Failed to delete todo');
+    }
+    await TodoGetter();
+    return await response.json();
+};
+
+
+
