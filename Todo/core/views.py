@@ -63,3 +63,20 @@ class ViewTodo(APIView):
 class TodoDestroyAPIView(DestroyAPIView):
     queryset = TodoItem.objects.all()
     serializer_class = serTodo
+
+
+class TodoUpdateAPIView(APIView):
+    def put(self, request, pk):
+        try:
+            todo = TodoItem.objects.get(pk=pk)
+        except TodoItem.DoesNotExist:
+            return Response({'status': 'error', 'message': 'Todo item not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serTodo(todo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status': 'bon', 'data': serializer.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({'status': 'error', 'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    
