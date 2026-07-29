@@ -16,7 +16,7 @@ import type { Todo_type } from "./utilities/types"
                     console.log(data);
                     setTodo(data);
                 } catch (error) {
-                    setError("can't laod Todos");
+                    setError("can't load Todos");
                 } finally {
                     setLoading(false);
                 }
@@ -31,7 +31,16 @@ import type { Todo_type } from "./utilities/types"
         if (error) return <p>{error}</p>;
 
 
-
+    const handleDelete = async (id: number) => {
+        try {
+            await TodoDelete(id);
+            const data = await TodoGetter();
+            setTodo(data);
+        } catch (error) {
+            setError("can't delete Todo");
+            console.error(error);
+        }
+    };
 
     return (
         <>
@@ -47,9 +56,9 @@ import type { Todo_type } from "./utilities/types"
                             {item.description}
                            
                     {/*    */}    
-                    <button onClick={() => {
+                            <button onClick={() => {
                                 if (item.id) {
-                                    TodoDelete(item.id)
+                                    handleDelete(item.id)
                                 }
                             }}>
                                 Delete  

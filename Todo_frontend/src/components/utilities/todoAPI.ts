@@ -61,7 +61,7 @@ export async function TodoDelete(id: number): Promise<Todo_type[]> {
         throw new Error('Failed to delete todo');
     }
     await TodoGetter();
-    return await response.json();
+   // return await response.json();
 };
 
 
